@@ -1,0 +1,14 @@
+service: appsync-tutorial
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stackName: appsync-tutorial
+  timeout: 30
+
+  deploymentPrefix: serverless
+  deploymentBucket: dzin-serverless-deploy
+
+functions:
+  hello:
+    handler: handler.hello
