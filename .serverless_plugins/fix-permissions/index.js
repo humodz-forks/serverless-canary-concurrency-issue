@@ -1,6 +1,6 @@
-// Ao usar provisionedConcurrency, o Serverless só dá permissão para o API Gateway chamar
-// o alias "provisioned" da função.
-// Este plugin substitui pelo alias criado pelo plugin serverless-plugin-canary-deployments
+// Fixes AWS::Lambda::Permission resources so that they point to
+// the aliases created by serverless-plugin-canary-deployments
+// instead of the aliases created by provisionedConcurrency
 
 module.exports = class FixPermissionsPlugin {
   constructor(serverless) {
@@ -34,7 +34,7 @@ module.exports = class FixPermissionsPlugin {
   }
 
   isProvisionedAlias(functionName) {
-    // Verifica se functionName está assim:
+    // Checks if functionName looks like this:
     // { "Fn::Join": [":", [functionArn, "provisioned"]] }
     return (
       functionName['Fn::Join'] &&
@@ -46,7 +46,7 @@ module.exports = class FixPermissionsPlugin {
 
   getCorrectFunctionName(functionName, functionToAliasMap) {
     const functionArn = functionName['Fn::Join'][1][0];
-    // Valor esperado do functionArn:
+    // functionArn should look like this:
     // { "Fn::GetAtt": [functionResourceName, "Arn"] }
     const functionResourceName = functionArn['Fn::GetAtt'][0];
 
