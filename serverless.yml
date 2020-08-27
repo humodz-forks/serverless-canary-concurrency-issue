@@ -11,9 +11,6 @@ provider:
   stackName: canary-provided-concurrency-issue
   timeout: 30
 
-  deploymentPrefix: serverless
-  deploymentBucket: dzin-serverless-deploy
-
 package:
   excludeDevDependencies: false
   exclude: ['**/**']
