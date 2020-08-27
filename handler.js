@@ -1,5 +1,8 @@
 
 module.exports.hello = async (event) => {
   console.log(event);
-  return 'hello world';
+  return {
+    statusCode: 200,
+    body: JSON.stringify({ message: 'Hello World! v4' }),
+  };
 };

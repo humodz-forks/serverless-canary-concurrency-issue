@@ -19,3 +19,5 @@ Thumbs.db
 node_modules
 yarn-error.log
 .serverless
+
+no-canary.json
